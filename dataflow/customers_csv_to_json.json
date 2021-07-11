@@ -1,0 +1,32 @@
+{
+	"name": "customers_csv_to_json",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Customers",
+						"type": "DatasetReference"
+					},
+					"name": "ReadCustomers"
+				}
+			],
+			"sinks": [
+				{
+					"linkedService": {
+						"referenceName": "AzureBlobStorage1",
+						"type": "LinkedServiceReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "GetCaliforniaCustomers"
+				}
+			],
+			"script": "source(output(\n\t\tcustomer_id as string,\n\t\tcustomer_fname as string,\n\t\tcustomer_lname as string,\n\t\tcustomer_email as string,\n\t\tcustomer_password as string,\n\t\tcustomer_street as string,\n\t\tcustomer_city as string,\n\t\tcustomer_state as string,\n\t\tcustomer_zipcode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ReadCustomers\nReadCustomers filter(customer_state == \"CA\") ~> GetCaliforniaCustomers\nGetCaliforniaCustomers sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'json',\n\tcontainer: 'raw-files-data-engg',\n\tpartitionFileNames:['customers_json'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink1"
+		}
+	}
+}
