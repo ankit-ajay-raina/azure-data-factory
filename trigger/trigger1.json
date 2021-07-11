@@ -3,15 +3,22 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
-		"pipelines": [],
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "CustomersCSVToJSON",
+					"type": "PipelineReference"
+				}
+			}
+		],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
 				"frequency": "Month",
 				"interval": 10,
-				"startTime": "2021-07-11T01:10:00Z",
-				"endTime": "2021-07-11T01:15:00Z",
-				"timeZone": "UTC",
+				"startTime": "2021-07-11T01:14:00",
+				"endTime": "2021-07-11T01:20:00",
+				"timeZone": "Central Standard Time",
 				"schedule": {
 					"monthDays": [
 						11
