@@ -14,10 +14,16 @@
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Minute",
-				"interval": 15,
+				"frequency": "Month",
+				"interval": 10,
 				"startTime": "2021-07-11T01:10:00Z",
-				"timeZone": "UTC"
+				"endTime": "2021-07-11T01:15:00Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"monthDays": [
+						11
+					]
+				}
 			}
 		}
 	}
